@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Descubrí tu futuro en Tucumán - Cuestionario Vocacional</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========== VARIABLES Y RESET ========== */
+    :root {
+      --bg-dark: #040d12;
+      --bg-dark-rgb: 4, 13, 18;
+      --bg-card: rgba(10, 25, 30, 0.65);
+      --border-color: rgba(10, 207, 131, 0.18);
+      --border-color-hover: rgba(0, 242, 254, 0.4);
+      --emerald: #0acf83;
+      --emerald-rgb: 10, 207, 131;
+      --turquoise: #00f2fe;
+      --turquoise-rgb: 0, 242, 254;
+      --accent-glow: rgba(10, 207, 131, 0.15);
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-highlight: #00f2fe;
+      
+      --grad-salud: linear-gradient(135deg, #0acf83, #2ecc71);
+      --grad-tecnologia: linear-gradient(135deg, #00f2fe, #4facfe);
+      --grad-sociales: linear-gradient(135deg, #f39c12, #d35400);
+      --grad-arte: linear-gradient(135deg, #9b59b6, #e91e63);
+      --grad-idiomas: linear-gradient(135deg, #8e44ad, #3498db);
+      --grad-oficios: linear-gradient(135deg, #ff6b6b, #f1c40f);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(10, 207, 131, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(4, 13, 18, 1) 0%, rgba(2, 6, 8, 1) 100%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+      font-weight: 700;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 720px;
+      padding: 24px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .screen {
+      display: none;
+      width: 100%;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 
+        0 12px 40px -10px rgba(0, 0, 0, 0.7),
+        0 0 20px 0 var(--accent-glow);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .glass-card:hover {
+      border-color: var(--border-color-hover);
+      box-shadow: 
+        0 12px 40px -10px rgba(0, 0, 0, 0.8),
+        0 0 30px 2px rgba(0, 242, 254, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-15px); }
+    }
+
+    .fade-out {
+      animation: fadeOut 0.3s ease forwards;
+    }
+
+    /* ========== PORTADA ========== */
+    .hero {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .welcome-tucu-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    .welcome-bubble {
+      position: relative;
+      background: rgba(13, 27, 33, 0.95);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 16px 24px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #e2e8f0;
+      max-width: 460px;
+      text-align: center;
+      margin-bottom: 12px;
+      box-shadow: 0 0 15px rgba(10, 207, 131, 0.15);
+    }
+
+    .welcome-bubble::after {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 14px;
+      height: 14px;
+      background: rgba(13, 27, 33, 0.95);
+      border-left: 1px solid var(--border-color);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .badge-tucuman {
+      background: linear-gradient(135deg, rgba(10, 207, 131, 0.15) 0%, rgba(0, 242, 254, 0.15) 100%);
+      border: 1.5px solid var(--emerald);
+      border-radius: 30px;
+      padding: 6px 18px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--turquoise);
+      box-shadow: 0 0 12px rgba(10, 207, 131, 0.2);
+      margin-top: 4px;
+      text-transform: uppercase;
+      display: inline-block;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #ffffff 10%, var(--turquoise) 60%, var(--emerald) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+      filter: drop-shadow(0 2px 8px rgba(0, 242, 254, 0.15));
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    /* ========== TUCU (personaje) ========== */
+    .tucu-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 16px 0 24px 0;
+      width: 100%;
+    }
+
+    .tucu-bubble {
+      position: relative;
+      background: rgba(13, 27, 33, 0.95);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 14px 18px;
+      max-width: 340px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: #e2e8f0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .tucu-bubble::after {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+      width: 14px;
+      height: 14px;
+      background: rgba(13, 27, 33, 0.95);
+      border-left: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .tucu-svg {
+      width: 140px;
+      height: 140px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    }
+
+    .welcome-tucu-svg {
+      width: 180px;
+      height: 180px;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
+    }
+
+    /* Animaciones del zorrito (sin cambios) */
+    .tucu-head {
+      animation: tucuFloat 3.5s ease-in-out infinite;
+      transform-origin: 100px 120px;
+    }
+    .tucu-ear-l-group {
+      animation: earTwitchL 7s ease-in-out infinite;
+      transform-origin: 70px 75px;
+    }
+    .tucu-ear-r-group {
+      animation: earTwitchR 6s ease-in-out infinite;
+      transform-origin: 130px 75px;
+    }
+    .tucu-eye {
+      animation: eyeBlink 4s ease-in-out infinite;
+      transform-origin: center;
+    }
+    .tucu-eye-pupil-l, .tucu-eye-pupil-r {
+      animation: eyeBlink 4s ease-in-out infinite;
+      transform-origin: center;
+    }
+    .tucu-tail {
+      animation: tailWag 2.5s ease-in-out infinite;
+      transform-origin: 120px 150px;
+    }
+    .tucu-tail-tip {
+      animation: tailWag 2.5s ease-in-out infinite;
+      transform-origin: 120px 150px;
+    }
+    .tucu-eye-happy { display: none; }
+    .tucu-mouth-happy { display: none; }
+    .is-happy .tucu-eye { display: none; }
+    .is-happy .tucu-eye-pupil-l { display: none; }
+    .is-happy .tucu-eye-pupil-r { display: none; }
+    .is-happy .tucu-eye-happy { display: block; }
+    .is-happy .tucu-mouth { display: none; }
+    .is-happy .tucu-mouth-happy { display: block; }
+    .is-happy .tucu-svg {
+      animation: tucuHop 0.4s ease;
+    }
+    .is-happy .tucu-tail {
+      animation: tailWagHappy 0.6s ease-in-out infinite;
+    }
+    .is-happy .tucu-tail-tip {
+      animation: tailWagHappy 0.6s ease-in-out infinite;
+    }
+
+    @keyframes tucuFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    @keyframes earTwitchL {
+      0%, 90%, 94%, 100% { transform: rotate(0deg); }
+      92% { transform: rotate(-6deg); }
+    }
+    @keyframes earTwitchR {
+      0%, 85%, 89%, 100% { transform: rotate(0deg); }
+      87% { transform: rotate(8deg); }
+    }
+    @keyframes eyeBlink {
+      0%, 90%, 100% { transform: scaleY(1); }
+      95% { transform: scaleY(0.1); }
+    }
+    @keyframes tailWag {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(8deg); }
+    }
+    @keyframes tailWagHappy {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(15deg); }
+    }
+    @keyframes tucuHop {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-12px) scale(1.05); }
+    }
+
+    /* ========== BARRA DE PROGRESO (STICKY) ========== */
+    .progress-container {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--bg-dark);
+      padding: 8px 0 8px 0;
+      margin-bottom: 12px;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      padding: 0 4px;
+    }
+
+    .progress-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .progress-number {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--turquoise);
+    }
+
+    .hills-progress-bar {
+      position: relative;
+      width: 100%;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+    }
+
+    .hills-svg-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hills-svg-container svg {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hills-bg {
+      opacity: 0.12;
+    }
+
+    .hills-fg {
+      transition: clip-path 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ========== PREGUNTAS (espacios reducidos) ========== */
+    #screen-quiz .glass-card {
+      padding: 20px;
+    }
+
+    .question-title {
+      font-size: 1.2rem;
+      line-height: 1.4;
+      margin-bottom: 18px;
+      text-align: center;
+      color: var(--text-main);
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 18px;
+    }
+
+    .option-btn {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.25s ease;
+    }
+
+    .option-indicator {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      flex-shrink: 0;
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .option-indicator::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--turquoise);
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .option-btn:hover {
+      background: rgba(10, 207, 131, 0.06);
+      border-color: rgba(10, 207, 131, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .option-btn.selected {
+      background: rgba(10, 207, 131, 0.15);
+      border-color: var(--emerald);
+      box-shadow: 0 0 15px rgba(10, 207, 131, 0.2);
+    }
+
+    .option-btn.selected .option-indicator {
+      border-color: var(--turquoise);
+    }
+
+    .option-btn.selected .option-indicator::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .option-btn:active {
+      background: rgba(10, 207, 131, 0.22);
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, var(--emerald) 0%, var(--turquoise) 100%);
+      border: none;
+      border-radius: 14px;
+      color: #020617;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(10, 207, 131, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(0, 242, 254, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary:disabled {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: #64748b;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    /* ========== RESULTADOS ========== */
+    .results-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .results-title {
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, var(--text-main) 30%, var(--turquoise) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .results-subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .profile-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+
+    .profile-title {
+      font-size: 1.15rem;
+      color: var(--turquoise);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .profile-text {
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+
+    .chart-container {
+      margin-bottom: 32px;
+    }
+
+    .chart-title {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      color: var(--text-main);
+      border-left: 3px solid var(--turquoise);
+      padding-left: 10px;
+    }
+
+    .chart-bar-group {
+      margin-bottom: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .chart-bar-group.dimmed {
+      opacity: 0.55;
+    }
+
+    .chart-bar-group.winner {
+      opacity: 1;
+      transform: scale(1.01);
+    }
+
+    .chart-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+
+    .chart-bar-group.winner .chart-bar-label {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .chart-bar-group.winner .score-text {
+      color: var(--turquoise);
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+    }
+
+    .chart-bar-bg {
+      height: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    .chart-bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 6px;
+      transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1);
+    }
+
+    .bar-salud { background: var(--grad-salud); }
+    .bar-tecnologia { background: var(--grad-tecnologia); }
+    .bar-sociales { background: var(--grad-sociales); }
+    .bar-arte { background: var(--grad-arte); }
+    .bar-idiomas { background: var(--grad-idiomas); }
+    .bar-oficios { background: var(--grad-oficios); }
+
+    .bar-dimmed {
+      background: rgba(148, 163, 184, 0.18) !important;
+    }
+
+    .carreras-container {
+      margin-bottom: 28px;
+    }
+
+    .carreras-title {
+      font-size: 1.15rem;
+      margin-bottom: 14px;
+      color: var(--text-main);
+      border-left: 3px solid var(--turquoise);
+      padding-left: 10px;
+    }
+
+    .carreras-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .carreras-list li {
+      position: relative;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #cbd5e1;
+      padding-left: 32px;
+      transition: background 0.2s;
+    }
+
+    .carreras-list li:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .carreras-list li::before {
+      content: '✦';
+      position: absolute;
+      left: 14px;
+      top: 10px;
+      color: var(--turquoise);
+      font-size: 0.8rem;
+    }
+
+    /* Mensaje final (centrado y justificado) */
+    .final-message-card {
+      background: linear-gradient(135deg, rgba(10, 207, 131, 0.05) 0%, rgba(0, 242, 254, 0.05) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 20px rgba(10, 207, 131, 0.05);
+    }
+
+    .final-message-title {
+      font-size: 1.1rem;
+      color: var(--emerald);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .final-message-text {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: #e2e8f0;
+      text-align: justify;
+    }
+
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 24px 16px 12px 16px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+      background: rgba(4, 13, 18, 0.8);
+      backdrop-filter: blur(8px);
+      margin-top: 40px;
+    }
+
+    footer p {
+      max-width: 600px;
+      margin: 0 auto;
+      letter-spacing: 0.02em;
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+      display: none;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .glass-card {
+        padding: 16px;
+        border-radius: 20px;
+      }
+      #screen-quiz .glass-card {
+        padding: 16px;
+      }
+      .question-title {
+        font-size: 1.05rem;
+      }
+      .option-btn {
+        padding: 12px 14px;
+        font-size: 0.85rem;
+      }
+      .tucu-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      .tucu-bubble {
+        max-width: 100%;
+      }
+      .tucu-bubble::after {
+        left: 50%;
+        top: -7px;
+        transform: translateX(-50%) rotate(45deg);
+        border-left: 1px solid var(--border-color);
+        border-top: 1px solid var(--border-color);
+        border-right: none;
+        border-bottom: none;
+      }
+      .progress-container {
+        padding: 6px 0;
+      }
+      .hills-progress-bar {
+        height: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="app-container">
+
+    <!-- ======== PORTADA ======== -->
+    <div id="screen-welcome" class="screen active">
+      <div class="glass-card hero">
+        <div class="welcome-tucu-container">
+          <svg viewBox="0 0 200 200" class="tucu-svg welcome-tucu-svg" xmlns="http://www.w3.org/2000/svg">
+            <path class="tucu-tail" d="M120,150 C140,150 160,130 160,110 C160,95 150,90 140,95 C130,100 120,120 120,150 Z" fill="#ff9800" stroke="#3e2723" stroke-width="2.5" />
+            <path class="tucu-tail-tip" d="M160,110 C160,100 155,92 145,94 C140,95 150,105 160,110 Z" fill="#ffffff" />
+            <path class="tucu-body" d="M70,160 C70,120 130,120 130,160 C130,170 70,170 70,160 Z" fill="#ff9800" stroke="#3e2723" stroke-width="2.5" />
+            <path class="tucu-chest" d="M85,130 C100,130 100,160 100,160 C100,160 100,130 85,130 Z" fill="#ffffff" stroke="#3e2723" stroke-width="1.5" />
+            <path class="tucu-paws" d="M85,160 C85,155 90,150 95,150 C100,150 105,155 105,160 M105,160 C105,155 110,150 115,150 C120,150 125,155 125,160" fill="none" stroke="#3e2723" stroke-width="2.5" stroke-linecap="round" />
+            <g class="tucu-head">
+              <g class="tucu-ear-l-group">
+                <path class="tucu-ear-l" d="M70,75 L50,40 C48,36 54,34 58,38 L82,65 Z" fill="#ff9800" stroke="#3e2723" stroke-width="2.5" />
+                <path class="tucu-ear-l-inner" d="M72,70 L55,45 C54,43 57,42 59,44 L78,63 Z" fill="#ff8a65" />
+              </g>
+              <g class="tucu-ear-r-group">
+                <path class="tucu-ear-r" d="M130,75 L150,40 C152,36 146,34 142,38 L118,65 Z" fill="#ff9800" stroke="#3e2723" stroke-width="2.5" />
+                <path class="tucu-ear-r-inner" d="M128,70 L145,45 C146,43 143,42 141,44 L122,63 Z" fill="#ff8a65" />
+              </g>
+              <path class="tucu-face" d="M60,90 C50,90 60,115 80,120 C90,122 110,122 120,120 C140,115 150,90 140,90 C130,70 70,70 60,90 Z" fill="#ff9800" stroke="#3e2723" stroke-width="2.5" />
+              <path class="tucu-cheek-l" d="M60,90 C55,100 68,110 75,110 C70,105 65,95 60,90 Z" fill="#ffd600" />
+              <path class="tucu-cheek-r" d="M140,90 C145,100 132,110 125,110 C130,105 135,95 140,90 Z" fill="#ffd600" />
+              <path class="tucu-muzzle" d="M85,110 C85,110 100,125 115,110 C120,105 115,100 100,100 C85,100 80,105 85,110 Z" fill="#ffffff" stroke="#3e2723" stroke-width="1.5" />
+              <polygon class="tucu-nose" points="96,106 104,106 100,112" fill="#222222" />
+              <ellipse class="tucu-eye tucu-eye-l" cx="82" cy="88" rx="4" ry="4" fill="#222222" />
+              <ellipse class="tucu-eye tucu-eye-r" cx="118" cy="88" rx="4" ry="4" fill="#222222" />
+              <ellipse class="tucu-eye-pupil-l" cx="81" cy="87" rx="1.5" ry="1.5" fill="#ffffff" />
+              <ellipse class="tucu-eye-pupil-r" cx="117" cy="87" rx="1.5" ry="1.5" fill="#ffffff" />
+              <path class="tucu-eye-happy tucu-eye-happy-l" d="M76,89 Q82,81 88,89" fill="none" stroke="#222222" stroke-width="2.5" stroke-linecap="round" />
+              <path class="tucu-eye-happy tucu-eye-happy-r" d="M112,89 Q118,81 124,89" fill="none" stroke="#222222" stroke-width="2.5" stroke-linecap="round" />
+              <path class="tucu-mouth" d="M96,114 Q100,117 104,114" fill="none" stroke="#222222" stroke-width="1.5" stroke-linecap="round" />
+              <path class="tucu-mouth-happy" d="M96,113 C96,113 100,122 104,113 Z" fill="#d84315" stroke="#3e2723" stroke-width="1" />
+            </g>
+          </svg>
+        </div>
+
+        <div class="welcome-bubble">
+          ¡Qué hacés che! ¿Listorti para descubrir tu futuro?
+        </div>
+
+        <div class="badge-tucuman">
+          Tucumán, Argentina
+        </div>
+
+        <h1 class="hero-title">Descubrí tu futuro en Tucumán</h1>
+
+        <p class="hero-subtitle">
+          Respondé estas 20 preguntas situacionales simples sobre tu día a día y encontrá qué áreas de estudio, oficios o profesorados se adaptan mejor a tu perfil en nuestra provincia.
+        </p>
+
+        <button id="btn-start" class="btn-primary" onclick="startQuiz()">
+          Comenzar cuestionario
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ======== CUESTIONARIO ======== -->
+    <div id="screen-quiz" class="screen">
+      
+      <!-- Barra de progreso (sticky) -->
+      <div class="progress-container">
+        <div class="progress-info">
+          <span class="progress-title">Tu progreso por los cerros</span>
+          <span class="progress-number" id="progress-text">Pregunta 1 de 20</span>
+        </div>
+        <div class="hills-progress-bar">
+          <div class="hills-svg-container hills-bg">
+            <svg viewBox="0 0 1000 60" preserveAspectRatio="none">
+              <path d="M0,60 L0,45 Q150,15 300,35 T600,20 T900,45 L1000,30 L1000,60 Z" fill="#142c22" />
+              <path d="M0,60 L0,50 Q200,25 400,42 T800,30 L1000,48 L1000,60 Z" fill="#0d1e19" />
+              <path d="M0,60 L0,55 C100,48 200,50 300,45 C450,35 550,55 700,42 L1000,52 L1000,60 Z" fill="#0a1511" />
+            </svg>
+          </div>
+          <div class="hills-svg-container hills-fg" id="hills-fg">
+            <svg viewBox="0 0 1000 60" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="hill-grad-far" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#057a55" />
+                  <stop offset="100%" stop-color="#023b28" />
+                </linearGradient>
+                <linearGradient id="hill-grad-mid" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0acf83" />
+                  <stop offset="100%" stop-color="#06734c" />
+                </linearGradient>
+                <linearGradient id="hill-grad-near" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00f2fe" />
+                  <stop offset="100%" stop-color="#0083fe" />
+                </linearGradient>
+              </defs>
+              <path d="M0,60 L0,45 Q150,15 300,35 T600,20 T900,45 L1000,30 L1000,60 Z" fill="url(#hill-grad-far)" />
+              <path d="M0,60 L0,50 Q200,25 400,42 T800,30 L1000,48 L1000,60 Z" fill="url(#hill-grad-mid)" />
+              <path d="M0,60 L0,55 C100,48 200,50 300,45 C450,35 550,55 700,42 L1000,52 L1000,60 Z" fill="url(#hill-grad-near)" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta de pregunta -->
+      <div class="glass-card" id="quiz-card">
+        
+        <div class="tucu-container" id="quiz-tucu-container">
+          <svg viewBox="0 0 200 200" class="tucu-svg" xmlns="http://www.w3.org/2000/svg">
+            <path class="tucu-tail" d="M120,150 C140,150 160,130 160,110 C160,95 150,90 140,95 C130,100 120,120 120,150 Z" fill="#ff9800" stroke="#3e2723" stroke-width="2.5" />
+            <path class="tucu-tail-tip" d="M160,110 C160,100 155,92 145,94 C140,95 150,105 160,110 Z" fill="#ffffff" />
+            <path class="tucu-body" d="M70,160 C70,120 130,120 130,160 C130,170 70,170 70,160 Z" fill="#ff9800" stroke="#3e2723" stroke-width="2.5" />
+            <path class="tucu-chest" d="M85,130 C100,130 100,160 100,160 C100,160 100,130 85,130 Z" fill="#ffffff" stroke="#3e2723" stroke-width="1.5" />
+            <path class="tucu-paws" d="M85,160 C85,155 90,150 95,150 C100,150 105,155 105,160 M105,160 C105,155 110,150 115,150 C120,150 125,155 125,160" fill="none" stroke="#3e2723" stroke-width="2.5" stroke-linecap="round" />
+            <g class="tucu-head">
+              <g class="tucu-ear-l-group">
+                <path class="tucu-ear-l" d="M70,75 L50,40 C48,36 54,34 58,38 L82,65 Z" fill="#ff9800" stroke="#3e2723" stroke-width="2.5" />
+                <path class="tucu-ear-l-inner" d="M72,70 L55,45 C54,43 57,42 59,44 L78,63 Z" fill="#ff8a65" />
+              </g>
+              <g class="tucu-ear-r-group">
+                <path class="tucu-ear-r" d="M130,75 L150,40 C152,36 146,34 142,38 L118,65 Z" fill="#ff9800" stroke="#3e2723" stroke-width="2.5" />
+                <path class="tucu-ear-r-inner" d="M128,70 L145,45 C146,43 143,42 141,44 L122,63 Z" fill="#ff8a65" />
+              </g>
+              <path class="tucu-face" d="M60,90 C50,90 60,115 80,120 C90,122 110,122 120,120 C140,115 150,90 140,90 C130,70 70,70 60,90 Z" fill="#ff9800" stroke="#3e2723" stroke-width="2.5" />
+              <path class="tucu-cheek-l" d="M60,90 C55,100 68,110 75,110 C70,105 65,95 60,90 Z" fill="#ffd600" />
+              <path class="tucu-cheek-r" d="M140,90 C145,100 132,110 125,110 C130,105 135,95 140,90 Z" fill="#ffd600" />
+              <path class="tucu-muzzle" d="M85,110 C85,110 100,125 115,110 C120,105 115,100 100,100 C85,100 80,105 85,110 Z" fill="#ffffff" stroke="#3e2723" stroke-width="1.5" />
+              <polygon class="tucu-nose" points="96,106 104,106 100,112" fill="#222222" />
+              <ellipse class="tucu-eye tucu-eye-l" cx="82" cy="88" rx="4" ry="4" fill="#222222" />
+              <ellipse class="tucu-eye tucu-eye-r" cx="118" cy="88" rx="4" ry="4" fill="#222222" />
+              <ellipse class="tucu-eye-pupil-l" cx="81" cy="87" rx="1.5" ry="1.5" fill="#ffffff" />
+              <ellipse class="tucu-eye-pupil-r" cx="117" cy="87" rx="1.5" ry="1.5" fill="#ffffff" />
+              <path class="tucu-eye-happy tucu-eye-happy-l" d="M76,89 Q82,81 88,89" fill="none" stroke="#222222" stroke-width="2.5" stroke-linecap="round" />
+              <path class="tucu-eye-happy tucu-eye-happy-r" d="M112,89 Q118,81 124,89" fill="none" stroke="#222222" stroke-width="2.5" stroke-linecap="round" />
+              <path class="tucu-mouth" d="M96,114 Q100,117 104,114" fill="none" stroke="#222222" stroke-width="1.5" stroke-linecap="round" />
+              <path class="tucu-mouth-happy" d="M96,113 C96,113 100,122 104,113 Z" fill="#d84315" stroke="#3e2723" stroke-width="1" />
+            </g>
+          </svg>
+          <div class="tucu-bubble" id="quiz-bubble">
+            ¡Metele chango, que esto recién empieza! ¿Qué harías acá?
+          </div>
+        </div>
+
+        <div id="question-text" class="question-title">Pregunta de prueba</div>
+        <div id="options-container" class="options-grid"></div>
+
+        <button id="btn-next" class="btn-primary" disabled onclick="nextQuestion()">
+          Siguiente pregunta
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ======== RESULTADOS ======== -->
+    <div id="screen-results" class="screen">
+      <div class="glass-card">
+        <div class="results-header">
+          <h2 class="results-title">¡Resultados Listos!</h2>
+          <p class="results-subtitle">Tu camino recomendado según tus respuestas en el cuestionario</p>
+        </div>
+
+        <div id="winner-profiles-container"></div>
+
+        <div class="chart-container">
+          <h3 class="chart-title">Resumen de afinidades por área</h3>
+          <div id="chart-bars-wrapper"></div>
+        </div>
+
+        <div id="careers-recommendations-container" class="carreras-container"></div>
+
+        <div class="final-message-card">
+          <h4 class="final-message-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            Mensaje Vocacional Orientativo
+          </h4>
+          <p class="final-message-text">
+            Este resultado no es un diagnóstico vocacional definitivo, sino una guía basada en tus intereses y preferencias. En Tucumán tenés muchas opciones gratuitas y aranceladas para seguir estudiando o formarte en un oficio con rápida salida laboral. No importa si tu camino es una carrera larga, una tecnicatura o un oficio: todas las opciones son valiosas y necesarias. Investiga, pregunta, y anímate a dar el primer paso. Existen becas como Progresar, Manuel Belgrano y programas provinciales que pueden acompañarte. ¡Atrévete a descubrir todo lo que podés lograr!
+          </p>
+        </div>
+
+        <button class="btn-primary" onclick="restartQuiz()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+          Volver a realizar el cuestionario
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Cuestionario Vocacional Orientativo de Tucumán • Desarrollado por Pablo Cejas</p>
+  </footer>
+
+  <!-- ======== JAVASCRIPT COMPLETO ======== -->
+  <script>
+    // ---------- PREGUNTAS ----------
+    const questions = [
+      {
+        text: "Pregunta 1: \"Estás en una plaza y un nene pequeño se cae de un juego y empieza a llorar. No hay ningún adulto cerca. ¿Qué hacés?\"",
+        options: [
+          { text: "Me fijo si puede mover el brazo y le limpio la lastimadura con agua de mi botella", area: "salud" },
+          { text: "Reviso el juego a ver si tiene algún fierro salido o está mal ajustado", area: "tecnologia" },
+          { text: "Le pregunto su nombre y si sabe dónde están sus padres para ir a buscarlos", area: "sociales" },
+          { text: "Saco un caramelo del bolsillo y le hago un dibujo rápido en una hoja para calmarlo", area: "arte" },
+          { text: "Mientras lo ayudo, le digo palabras en otro idioma que aprendí para ver si entiende", area: "idiomas" },
+          { text: "Lo ayudo a pararse y busco al encargado del playón para contarle lo que pasó", area: "oficios" }
+        ]
+      },
+      {
+        text: "Pregunta 2: \"Tus vecinos organizan un festival barrial para juntar fondos. ¿En qué tarea te ofrecerías a ayudar?\"",
+        options: [
+          { text: "En el puesto de comida, cocinando empanadas y cosas ricas para vender", area: "oficios" },
+          { text: "Organizando un campeonato de fútbol con equipos por manzana", area: "sociales" },
+          { text: "Pintando un mural que represente la historia del barrio en una pared", area: "arte" },
+          { text: "Haciendo los carteles de precios con letras grandes y vistosas", area: "idiomas" },
+          { text: "Cuidando que ninguna persona corra peligro y ayudando si hay alguien lastimado", area: "salud" },
+          { text: "Conectando las luces y los parlantes para que suene la música", area: "tecnologia" }
+        ]
+      },
+      {
+        text: "Pregunta 3: \"Te regalan una caja llena de componentes electrónicos viejos. ¿Qué se te cruza por la cabeza?\"",
+        options: [
+          { text: "Desarmar todo y clasificar las piezas que todavía sirven", area: "tecnologia" },
+          { text: "Donar lo que no use a una escuela técnica para que practiquen", area: "sociales" },
+          { text: "Armar una escultura de robot con los componentes y exponerla", area: "arte" },
+          { text: "Separar el cobre y otros metales para venderlos", area: "oficios" },
+          { text: "Buscar en internet tutoriales en inglés sobre reciclaje electrónico", area: "idiomas" },
+          { text: "Revisar que no haya pilas derramadas que puedan ser tóxicas", area: "salud" }
+        ]
+      },
+      {
+        text: "Pregunta 4: \"En una reunión familiar, hay una discusión sobre qué hacer con un terreno heredado. ¿Qué postura tomás?\"",
+        options: [
+          { text: "Propongo que se haga una huerta comunitaria y se repartan las verduras", area: "salud" },
+          { text: "Dibujo un plano a mano alzada de cómo se podría distribuir una casa", area: "arte" },
+          { text: "Sugiero que se averigüe la situación legal antes de tomar decisiones", area: "sociales" },
+          { text: "Ofrezco calcular cuánta plata se necesita para construir algo básico", area: "oficios" },
+          { text: "Planteo que podrían alquilarlo y ayudo a publicitarlo", area: "idiomas" },
+          { text: "Investigo si se puede instalar algún sistema que mejore económicamente el terreno", area: "tecnologia" }
+        ]
+      },
+      {
+        text: "Pregunta 5: \"Estás viendo una serie en otro idioma sin subtítulos. ¿Cómo reaccionás?\"",
+        options: [
+          { text: "Intento adivinar la trama por el tono de voz y las expresiones de los actores", area: "idiomas" },
+          { text: "Me concentro en la fotografía, los colores y la música de fondo", area: "arte" },
+          { text: "Busco información sobre la cultura de ese lugar para entender mejor", area: "sociales" },
+          { text: "Activo una extensión del navegador que traduce en tiempo real", area: "tecnologia" },
+          { text: "Anoto las frases que me llaman la atención para buscarlas después", area: "oficios" },
+          { text: "Lo dejo de fondo mientras me preparo un licuado de frutas ", area: "salud" }
+        ]
+      },
+      {
+        text: "Pregunta 6: \"En tu curso quieren hacer un proyecto para mejorar la escuela. ¿Qué idea propondrías?\"",
+        options: [
+          { text: "Armar un botiquín completo y dar talleres de primeros auxilios", area: "salud" },
+          { text: "Crear un perfil en redes sociales para la escuela con contenidos educativos", area: "tecnologia" },
+          { text: "Organizar un debate sobre los derechos de los estudiantes", area: "sociales" },
+          { text: "Pintar un mural colectivo que refleje la identidad de la escuela", area: "arte" },
+          { text: "Hacer una feria de intercambio de libros y revistas en distintos idiomas", area: "idiomas" },
+          { text: "Restaurar los bancos y mesas del patio con ayuda de voluntarios", area: "oficios" }
+        ]
+      },
+      {
+        text: "Pregunta 7: \"Un amigo te dice que quiere dejar la escuela porque no le ve sentido y necesita trabajar. ¿Qué le dirías?\"",
+        options: [
+          { text: "Le pregunto cómo está durmiendo y si come bien, porque a veces eso influye en las decisiones", area: "salud" },
+          { text: "Le muestro cursos gratuitos de programación o reparación de celulares que puede hacer mientras estudia", area: "tecnologia" },
+          { text: "Le comento que hay planes para terminar el secundario de noche y que no está solo en esto", area: "sociales" },
+          { text: "Le digo que puede vender dibujos o tocar en la peatonal, que tiene talento", area: "arte" },
+          { text: "Le propongo que estudiemos juntos algún idioma, ya que es una herramienta para cualquier trabajo", area: "idiomas" },
+          { text: "Le ofrezco enseñarle lo que sé de electricidad y arreglos para que pueda changuear", area: "oficios" }
+        ]
+      },
+      {
+        text: "Pregunta 8: \"Te invitan a una campaña contra el dengue en tu barrio. ¿Qué rol elegís?\"",
+        options: [
+          { text: "Recorrer las casas mostrando cómo tapar recipientes y descacharrar", area: "salud" },
+          { text: "Dibujar un mapa con las zonas más comprometidas para organizar las visitas", area: "arte" },
+          { text: "Convencer a los vecinos de que dejen entrar a los voluntarios", area: "sociales" },
+          { text: "Escribir un comunicado para el grupo de WhatsApp del barrio", area: "idiomas" },
+          { text: "Reparar los timbres y arreglar las luces de los pasillos para las visitas nocturnas", area: "tecnologia" },
+          { text: "Preparar repelente casero con aceites esenciales para repartir", area: "oficios" }
+        ]
+      },
+      {
+        text: "Pregunta 9: \"Encontrás una máquina de coser antigua en tu casa. ¿Qué hacés?\"",
+        options: [
+          { text: "La desarmo con cuidado para ver si tiene piezas oxidadas o rotas", area: "tecnologia" },
+          { text: "Busco tutoriales en YouTube para aprender a coser mis propias cosas", area: "oficios" },
+          { text: "Diseño un vestido con retazos y se lo regalo a mi hermana", area: "arte" },
+          { text: "Me fijo en las etiquetas de la máquina, que están en inglés, y las traduzco", area: "idiomas" },
+          { text: "Investigo si hay talleres de costura gratuitos en la municipalidad", area: "sociales" },
+          { text: "La limpio a fondo y le pongo aceite, pensando en venderla si no la uso", area: "salud" }
+        ]
+      },
+      {
+        text: "Pregunta 10: \"Estás organizando un viaje de egresados con poco presupuesto. ¿En qué te concentrás?\"",
+        options: [
+          { text: "Buscar un lugar con opciones de comida casera y cercanía a un centro de salud", area: "salud" },
+          { text: "Comparar precios de micro y alojamiento en una planilla de cálculo", area: "tecnologia" },
+          { text: "Armar rifas y vender pizzas para juntar fondos", area: "oficios" },
+          { text: "Diseñar las remeras del viaje con un logo original", area: "arte" },
+          { text: "Elegir un destino donde se hable otro idioma para practicar", area: "idiomas" },
+          { text: "Investigar la historia y las costumbres del lugar que visitaremos", area: "sociales" }
+        ]
+      },
+      {
+        text: "Pregunta 11: \"Un nene del barrio te pide ayuda con la tarea de inglés. ¿Qué hacés?\"",
+        options: [
+          { text: "Le explico con ejemplos que él entienda y después repasamos en voz alta", area: "idiomas" },
+          { text: "Le enseño a usar un diccionario en línea y aplicaciones de traducción", area: "tecnologia" },
+          { text: "Le hago dibujitos al lado de cada palabra nueva para que las asocie", area: "arte" },
+          { text: "Hablo con sus padres para ver si necesita apoyo en otras materias", area: "sociales" },
+          { text: "Le preparo una merienda liviana para que se concentre mejor", area: "salud" },
+          { text: "Le armo un horario semanal de estudio y le ofrezco ayudarlo todos los días", area: "oficios" }
+        ]
+      },
+      {
+        text: "Pregunta 12: \"Hay un concurso en la escuela para rediseñar el logo del centro de estudiantes. ¿Participarías?\"",
+        options: [
+          { text: "Sí, y haría varias versiones en papel antes de pasarlo a digital", area: "arte" },
+          { text: "Sí, pero antes preguntaría a los demás qué significado le quieren dar", area: "sociales" },
+          { text: "Sí, usaría un programa de diseño gratuito y tutoriales", area: "tecnologia" },
+          { text: "Sí, y le pondría frases en distintos idiomas que usamos en la escuela", area: "idiomas" },
+          { text: "Sí, y me fijaría que los colores transmitan energía y confianza", area: "salud" },
+          { text: "Sí, y propondría a estampar el logo en remeras para recaudar fondos", area: "oficios" }
+        ]
+      },
+      {
+        text: "Pregunta 13: \"Te proponen trabajar en un campamento de verano para chicos. ¿Qué puesto elegís?\"",
+        options: [
+          { text: "Cocinar platos nutritivos y enseñarles a armar viandas saludables", area: "salud" },
+          { text: "Organizar juegos cooperativos y fogones con historias", area: "sociales" },
+          { text: "Dar un taller de instrumentos musicales con objetos reciclados", area: "arte" },
+          { text: "Enseñar canciones en otro idioma y juegos con palabras", area: "idiomas" },
+          { text: "Reparar las carpas, arreglar las canillas y mantener el lugar en condiciones", area: "oficios" },
+          { text: "Crear un grupo privado de WhatsApp para que los padres reciban fotos diarias", area: "tecnologia" }
+        ]
+      },
+      {
+        text: "Pregunta 14: \"Se rompe el ventilador del aula en pleno enero. ¿Cómo reaccionás?\"",
+        options: [
+          { text: "Busco un destornillador y me fijo si es algo simple del cableado", area: "tecnologia" },
+          { text: "Voy a hablar con el preceptor para que gestionen la reparación", area: "sociales" },
+          { text: "Propongo dar la clase bajo los árboles del patio, que es más sano", area: "salud" },
+          { text: "Le pido a un compañero que sabe de electricidad que lo revise", area: "oficios" },
+          { text: "Dibujo un ventilador gigante en el pizarrón y escribo 'se busca reparación urgente'", area: "arte" },
+          { text: "Aprovecho para jugar y practicar vocabulario sobre el calor y las estaciones en inglés", area: "idiomas" }
+        ]
+      },
+      {
+        text: "Pregunta 15: \"Querés hacer un regalo de cumpleaños con tus propias manos. ¿Por qué optás?\"",
+        options: [
+          { text: "Un almohadón tejido o una bufanda con lana de colores", area: "oficios" },
+          { text: "Una tarjeta enorme con ilustraciones originales y frases inventadas", area: "arte" },
+          { text: "Una selección de canciones grabadas en un pendrive con una nota escrita a mano", area: "idiomas" },
+          { text: "Un collage con fotos intervenidas y un marco de cartón decorado", area: "arte" },
+          { text: "Una caja de galletitas de avena con una receta saludable escrita", area: "salud" },
+          { text: "Un organizador de escritorio hecho con latas y madera reciclada", area: "tecnologia" }
+        ]
+      },
+      {
+        text: "Pregunta 16: \"Ves que en tu barrio muchos chicos no van a la escuela. ¿Qué idea te surge?\"",
+        options: [
+          { text: "Organizar un merendero con apoyo escolar los sábados", area: "sociales" },
+          { text: "Enseñarles un oficio como peluquería o arreglo de bicicletas", area: "oficios" },
+          { text: "Armar un taller de lectura y escritura para los más chicos", area: "idiomas" },
+          { text: "Hacer un control de peso y talla para detectar problemas de nutrición", area: "salud" },
+          { text: "Crear una aplicación simple para que los padres sepan las fechas de inscripción", area: "tecnologia" },
+          { text: "Pintar un mural que diga 'Estudiar te cambia la vida' con la ayuda de todos", area: "arte" }
+        ]
+      },
+      {
+        text: "Pregunta 17: \"Te encontrás con un celular que no prende. ¿Qué hacés?\"",
+        options: [
+          { text: "Lo desarmo con cuidado, limpio los contactos y veo si revive", area: "tecnologia" },
+          { text: "Lo llevo a un técnico de confianza para que lo revise", area: "oficios" },
+          { text: "Pregunto en el grupo de la escuela si alguien sabe cómo arreglarlo", area: "sociales" },
+          { text: "Busco en internet tutoriales en inglés sobre reparación de placas", area: "idiomas" },
+          { text: "Le pego stickers y lo convierto en un pisapapeles decorativo", area: "arte" },
+          { text: "Lo dejo, pero me pregunto si la batería inflamada puede ser peligrosa", area: "salud" }
+        ]
+      },
+      {
+        text: "Pregunta 18: \"Tu curso prepara un acto para el Día de la Independencia. ¿En qué te sumás?\"",
+        options: [
+          { text: "Escribir el discurso y ayudar a los que tienen que hablar en público", area: "idiomas" },
+          { text: "Bailar, actuar o tocar un instrumento en la parte artística", area: "arte" },
+          { text: "Investigar sobre la vida en 1816 y contar curiosidades", area: "sociales" },
+          { text: "Grabar la obra con el celular y editarla para subirla a internet", area: "tecnologia" },
+          { text: "Preparar pastelitos y empanadas para vender y recaudar fondos", area: "oficios" },
+          { text: "Asegurarme de que tengamos agua fresca y ventilación en el salón", area: "salud" }
+        ]
+      },
+      {
+        text: "Pregunta 19: \"Un familiar te dice que se siente muy solo. ¿Qué le propondrías?\"",
+        options: [
+          { text: "Que se anote en un taller de jardinería o cocina del centro de jubilados", area: "oficios" },
+          { text: "Que adoptemos juntos una mascota y le damos los cuidados básicos", area: "salud" },
+          { text: "Que hagamos un curso online de pintura o fotografía", area: "arte" },
+          { text: "Que se sume a un grupo de conversación en inglés para adultos", area: "idiomas" },
+          { text: "Que participe en las reuniones de la parroquia o de la biblioteca barrial", area: "sociales" },
+          { text: "Le instalo una aplicación de videollamadas para que hable con sus nietos", area: "tecnologia" }
+        ]
+      },
+      {
+        text: "Pregunta 20: \"Imaginá que tenés un día completamente libre, sin obligaciones. ¿Cómo lo pasarías?\"",
+        options: [
+          { text: "Me iría a colaborar en un refugio de animales o en un comedor", area: "salud" },
+          { text: "Me quedaría probando una app nueva de diseño o de programación", area: "tecnologia" },
+          { text: "Me iría a la plaza a leer y después pasearía por el centro histórico", area: "sociales" },
+          { text: "Me pondría a pintar, escribir una canción o hacer un video corto", area: "arte" },
+          { text: "Practicaría inglés con una serie y después cocinaría algo rico siguiendo una receta", area: "idiomas" },
+          { text: "Arreglaría cosas pendientes en casa y después vendería algo que ya no uso", area: "oficios" }
+        ]
+      }
+    ];
+
+    // ---------- DIÁLOGOS ----------
+    const tucuQuestionDialogues = [
+      "¡Metele chango, que esto recién empieza! ¿Qué harías acá?",
+      "¡Upa, mirá vos esa! ¿En qué te ves dando una mano?",
+      "¡A full, che! Esta de los componentes viejos es clave, pensala...",
+      "Mirá que el futuro está al caer, ¿qué te tinca más con el terreno?",
+      "¡Qué gran decisión! Si no hay subtítulos, ¿qué hacés vos?",
+      "¡Esa me gusta! Vas de diez, changuito. ¿Qué idea tirarías en la escuela?",
+      "¡Chura la pregunta! Tu amigo te necesita, ¿cómo lo aconsejás?",
+      "¡Vamos, que no decaiga! Contra el dengue, ¿dónde ponés el lomo?",
+      "¡Qué churo! Una máquina de coser... ¿Qué te pinta hacer con ella?",
+      "¡Ya vamos por la mitad, che! ¡Manso aguante! ¿Qué hacés con el viaje?",
+      "¡Alpa, vas re rápido! Metele pata ayudando con el inglés...",
+      "¡Opas! Diseñar el logo es todo un tema, ¿te prendés chango?",
+      "¡Qué capo que sos, dale que falta poco! ¿Qué elegís en el campamento?",
+      "Se rompió el ventilador... ¡Manso calor! ¿Cómo reaccionás?",
+      "¡Hacer un regalo con tus manos es re churo! ¿Por qué opción vas?",
+      "¡Quedan sólo cinco! ¡Ya tamos terminando! ¿Qué idea tenés para los chicos?",
+      "¡Qué picante un celu roto! ¿Qué hacés vos para ver si anda?",
+      "¡El acto del 9 de Julio! Alta fecha patria en Tucumán. ¿En qué te sumás?",
+      "¡La anteúltima, chango! Para no sentirse solo, ¿qué se hace?",
+      "¡La última y a cobrar! ¡Qué emoción, che! ¿Cómo pasás el día libre?"
+    ];
+
+    const tucuOptionReactions = [
+      "¡Mansa elección, che! Hacé click en Siguiente.",
+      "¡De una! Me gusta por dónde vas. ¡Sigamos!",
+      "¡Esa es buena, chango! Avanzamos cuando quieras.",
+      "¡Mira vos! Interesante tu respuesta...",
+      "¡Zarpado! Excelente decisión, metele siguiente.",
+      "¡Claaa, totalmente de acuerdo! Dale a siguiente.",
+      "¡Qué churo! Bien ahí, continuemos.",
+      "¡Posta! Yo haría lo mismo. Vamos a la otra.",
+      "¡Ahí va queriendo! ¡Metele siguiente nomás!",
+      "¡Golazo! Esa opción tiene toda la onda, pasemos de hoja."
+    ];
+
+    // ---------- DATOS DE ÁREAS ----------
+    const areaData = {
+      salud: {
+        title: "ÁREA SALUD Y BIENESTAR",
+        profile: "Sos una persona solidaria, empática y con una marcada vocación de servicio y sensibilidad por el bienestar de los demás. Te interesa cuidar, sanar, aconsejar y promover un estilo de vida saludable en tu comunidad, ya sea a través de la medicina, la nutrición, el deporte o el trabajo de asistencia en el territorio de nuestra provincia.",
+        color: "var(--grad-salud)",
+        carreras: [
+          "Medicina (6 años) – UNT",
+          "Enfermería Universitaria (5 años) y Tecnicatura en Enfermería (3 años) – UNT, Cruz Roja, institutos",
+          "Psicología (5 años) – UNT, USPT",
+          "Nutrición (5 años) – UNT, USPT",
+          "Odontología (5 años) – UNT",
+          "Kinesiología y Fisioterapia (5 años) – UNT",
+          "Bioquímica (5 años) – UNT",
+          "Farmacia (5 años) – UNT",
+          "Acompañante Terapéutico (2-3 años) – institutos terciarios",
+          "Instrumentación Quirúrgica (tecnicatura) – institutos",
+          "Gastronomía con orientación en cocina saludable (2 años) – IGA, escuelas municipales",
+          "Panadería y pastelería artesanal (oficio, cursos de 6 meses a 1 año) – CFP, municipios",
+          "Huerta agroecológica (cursos cortos) – INTA, escuelas agrotécnicas",
+          "Asistente en cuidados de adultos mayores (curso) – Cruz Roja, municipios",
+          "Masajista y Quiromasajista (curso) – institutos privados",
+          "Promotor de Salud Comunitaria (curso) – municipios, ONGs"
+        ]
+      },
+      tecnologia: {
+        title: "ÁREA TECNOLOGÍA, INGENIERÍA Y COMPUTACIÓN",
+        profile: "Tenés una mente sumamente analítica, curiosa, lógica y orientada a resolver problemas complejos de forma práctica. Te apasiona entender cómo funcionan las máquinas y sistemas, programar código, diseñar estructuras o construir la infraestructura tecnológica y física del futuro. La informática y la ingeniería son indudablemente tu camino.",
+        color: "var(--grad-tecnologia)",
+        carreras: [
+          "Ingeniería en Sistemas de Información (5 años) – UTN-FRT, UNT (Licenciatura en Informática)",
+          "Ingeniería Civil (5 años) – UNT, UTN-FRT",
+          "Ingeniería Eléctrica (5 años) – UNT",
+          "Ingeniería Electrónica (5 años) – UTN-FRT",
+          "Ingeniería Mecánica (5 años) – UNT, UTN-FRT",
+          "Ingeniería Industrial (5 años) – UNT, UTN-FRT",
+          "Ingeniería Química (5 años) – UNT",
+          "Licenciatura en Informática (5 años) – UNT",
+          "Profesorado en Matemática o Física (4 años) – UNT, IES",
+          "Tecnicatura Universitaria en Programación (2 años) – UTN-FRT",
+          "Tecnicatura en Higiene y Seguridad en el Trabajo – UNT, UTN",
+          "Tecnicatura en Mecatrónica – escuelas técnicas e institutos",
+          "Electricista industrial y domiciliario (oficio) – CFP, institutos técnicos",
+          "Gasista matriculado (curso) – centros de formación profesional",
+          "Técnico en energías renovables (cursos y tecnicaturas) – UTN, institutos",
+          "Refrigeración y aire acondicionado (curso) – institutos"
+        ]
+      },
+      sociales: {
+        title: "ÁREA CIENCIAS SOCIALES, DERECHO Y HUMANIDADES",
+        profile: "Te destaca tu gran sentido de empatía, tu fuerte interés por la justicia, la historia, el debate de ideas y la organización social. Te motiva comprender la mente de las personas, defender y garantizar derechos, educar a las nuevas generaciones y contribuir de manera activa a mejorar las instituciones y el tejido comunitario de Tucumán.",
+        color: "var(--grad-sociales)",
+        carreras: [
+          "Abogacía (5 años) – UNT, USPT",
+          "Contador Público (5 años) – UNT, USPT",
+          "Licenciatura en Administración de Empresas (5 años) – UNT, USPT",
+          "Licenciatura en Economía (5 años) – UNT",
+          "Trabajo Social (5 años) – UNT",
+          "Ciencias de la Educación (5 años) – UNT",
+          "Filosofía (5 años) – UNT",
+          "Profesorado de Educación Inicial (4 años) – UNT, IES",
+          "Profesorado de Educación Primaria (4 años) – UNT, IES",
+          "Profesorado de Educación Especial (4 años) – IES",
+          "Profesorado de Educación Física (4 años) – UNT, IES",
+          "Profesorados de Secundaria en Historia, Geografía, Letras, Biología, Matemática, etc. (4 años) – UNT, IES",
+          "Tecnicatura en Gestión de Políticas Públicas – UNT",
+          "Tecnicatura en Administración de Empresas (2-3 años) – institutos terciarios",
+          "Operador socio-comunitario (curso) – municipios, ONGs"
+        ]
+      },
+      arte: {
+        title: "ÁREA ARTE, DISEÑO Y EXPRESIÓN VISUAL",
+        profile: "Sos una persona sumamente creativa, sensible, observadora y expresiva. Encontrás en las formas geométricas, los colores, las melodías, el movimiento corporal, la fotografía o las producciones audiovisuales tu canal primario de comunicación con el mundo. Tenés la capacidad de embellecer tu entorno y convertir ideas abstractas en realidades tangibles.",
+        color: "var(--grad-arte)",
+        carreras: [
+          "Arquitectura (5 años) – UNT (FAU), USPT",
+          "Diseño de Interiores (tecnicatura) – UNT, USPT",
+          "Licenciatura en Artes Plásticas (5 años) – UNT, Escuela de Bellas Artes",
+          "Profesorado en Artes Plásticas – UNT, Bellas Artes",
+          "Diseño Gráfico – UNT, USPT, institutos terciarios",
+          "Licenciatura en Música (orientación instrumento, dirección coral, etc.) – UNT",
+          "Profesorado de Música – UNT, conservatorios, IES",
+          "Cine y Televisión – Escuela Universitaria de Cine, Video y Televisión (UNT)",
+          "Diseño Textil e Indumentaria – UNT (Facultad de Artes)",
+          "Fotografía (tecnicatura) – institutos",
+          "Diseño de Videojuegos – institutos privados con convenios",
+          "Cerámica artística (oficio) – CFP, escuelas de arte",
+          "Realización de murales y arte público (talleres) – municipios, centros culturales"
+        ]
+      },
+      idiomas: {
+        title: "ÁREA IDIOMAS, COMUNICACIÓN Y PERIODISMO",
+        profile: "Poseés una gran fluidez natural para la palabra escrita u oral, la expresión comunicativa y el entendimiento profundo de otras culturas e idiomas. Te apasiona contar historias veraces, redactar contenidos atractivos, tender puentes entre personas y difundir información relevante en la sociedad actual a través de diversos medios.",
+        color: "var(--grad-idiomas)",
+        carreras: [
+          "Licenciatura en Inglés (5 años) – UNT (Facultad de Filosofía y Letras)",
+          "Profesorado de Inglés (4 años) – IES Lola Mora, UNT, otros IES",
+          "Profesorado de Francés (4 años) – IES Lola Mora, UNT",
+          "Profesorado de Portugués (4 años) – UNT",
+          "Traductorado Público de Inglés (5 años) – UNT (próxima apertura)",
+          "Licenciatura en Comunicación Social (5 años) – UNT, USPT",
+          "Tecnicatura en Periodismo – institutos terciarios",
+          "Locución Integral (curso) – ISER, institutos privados",
+          "Corrector de textos (curso) – modalidad virtual, institutos",
+          "Guionista y producción de contenidos (cursos) – espacios culturales, centros de formación",
+          "Profesorado de Lengua y Literatura (4 años) – UNT, IES"
+        ]
+      },
+      oficios: {
+        title: "ÁREA OFICIOS, SERVICIOS Y EMPRENDIMIENTOS",
+        profile: "Sos una persona sumamente activa, práctica, que disfruta del trabajo manual detallado y posee un espíritu marcadamente emprendedor. Te entusiasma ver el fruto directo y físico de tu trabajo diario, resolver necesidades de servicios clave o liderar tu propio negocio o proyecto de forma independiente y autónoma.",
+        color: "var(--grad-oficios)",
+        carreras: [
+          "Gastronomía y Chef (2-3 años) – IGA, escuelas de oficios municipales",
+          "Panadero, pastelero y confitero (cursos cortos) – CFP, sindicatos",
+          "Electricista matriculado (curso) – CFP, escuelas técnicas",
+          "Instalador sanitario y plomero (oficio) – CFP",
+          "Soldadura (oficio con certificación) – CFP, escuelas técnicas",
+          "Carpintería y mueblería (oficio) – CFP, escuelas de oficios",
+          "Mecánica de autos y motos (oficio) – CFP, escuelas técnicas",
+          "Peluquería y estilismo (oficio) – CFP, academias",
+          "Maquillaje profesional (curso) – institutos",
+          "Costura, confección y arreglos textiles (oficio) – CFP, municipios",
+          "Serigrafía y estampado textil (curso) – centros culturales, CFP",
+          "Artesanías en cuero, madera y metal (oficio) – talleres municipales",
+          "Emprendedurismo (cursos cortos con orientación a microemprendimientos) – municipios, escuelas de negocios",
+          "Técnico en turismo (tecnicatura 2-3 años) – institutos, UNT"
+        ]
+      }
+    };
+
+    // ---------- ESTADO ----------
+    let currentQuestionIndex = 0;
+    let scores = {
+      salud: 0,
+      tecnologia: 0,
+      sociales: 0,
+      arte: 0,
+      idiomas: 0,
+      oficios: 0
+    };
+    let selectedOptionIndex = null;
+
+    // ---------- FUNCIONES ----------
+    function showScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(screenId).classList.add('active');
+    }
+
+    function startQuiz() {
+      currentQuestionIndex = 0;
+      selectedOptionIndex = null;
+      scores = { salud: 0, tecnologia: 0, sociales: 0, arte: 0, idiomas: 0, oficios: 0 };
+      const welcomeCard = document.querySelector('#screen-welcome .glass-card');
+      welcomeCard.classList.add('fade-out');
+      setTimeout(() => {
+        welcomeCard.classList.remove('fade-out');
+        showScreen('screen-quiz');
+        renderQuestion();
+      }, 300);
+    }
+
+    function updateProgress(percent) {
+      const hillsFg = document.getElementById('hills-fg');
+      if (hillsFg) {
+        const rightInset = 100 - percent;
+        hillsFg.style.clipPath = `inset(0 ${rightInset}% 0 0)`;
+      }
+    }
+
+    function renderQuestion() {
+      const currentQuestion = questions[currentQuestionIndex];
+      selectedOptionIndex = null;
+      
+      const btnNext = document.getElementById('btn-next');
+      btnNext.disabled = true;
+      btnNext.innerText = "Siguiente pregunta";
+
+      const progressPercent = (currentQuestionIndex / questions.length) * 100;
+      updateProgress(progressPercent);
+      document.getElementById('progress-text').innerText = `Pregunta ${currentQuestionIndex + 1} de ${questions.length}`;
+
+      document.getElementById('question-text').innerText = currentQuestion.text;
+
+      const quizBubble = document.getElementById('quiz-bubble');
+      quizBubble.innerText = tucuQuestionDialogues[currentQuestionIndex];
+
+      const quizTucuContainer = document.getElementById('quiz-tucu-container');
+      quizTucuContainer.classList.remove('is-happy');
+
+      const optionsContainer = document.getElementById('options-container');
+      optionsContainer.innerHTML = '';
+      
+      currentQuestion.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.onclick = () => selectOption(idx);
+
+        const indicator = document.createElement('span');
+        indicator.className = 'option-indicator';
+
+        const textSpan = document.createElement('span');
+        textSpan.innerText = opt.text;
+
+        btn.appendChild(indicator);
+        btn.appendChild(textSpan);
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function selectOption(index) {
+      selectedOptionIndex = index;
+      
+      const buttons = document.querySelectorAll('.option-btn');
+      buttons.forEach((btn, idx) => {
+        btn.classList.toggle('selected', idx === index);
+      });
+
+      const btnNext = document.getElementById('btn-next');
+      btnNext.disabled = false;
+      if (currentQuestionIndex === questions.length - 1) {
+        btnNext.innerText = "Ver mis resultados";
+      }
+
+      const quizTucuContainer = document.getElementById('quiz-tucu-container');
+      quizTucuContainer.classList.remove('is-happy');
+      void quizTucuContainer.offsetWidth;
+      quizTucuContainer.classList.add('is-happy');
+
+      const randomReaction = tucuOptionReactions[Math.floor(Math.random() * tucuOptionReactions.length)];
+      document.getElementById('quiz-bubble').innerText = randomReaction;
+    }
+
+    function nextQuestion() {
+      if (selectedOptionIndex === null) return;
+
+      const currentQuestion = questions[currentQuestionIndex];
+      const selectedArea = currentQuestion.options[selectedOptionIndex].area;
+      scores[selectedArea]++;
+
+      if (currentQuestionIndex === questions.length - 1) {
+        updateProgress(100);
+        const quizCard = document.getElementById('quiz-card');
+        quizCard.classList.add('fade-out');
+        setTimeout(() => {
+          quizCard.classList.remove('fade-out');
+          showResults();
+        }, 300);
+      } else {
+        const quizCard = document.getElementById('quiz-card');
+        quizCard.classList.add('fade-out');
+        setTimeout(() => {
+          currentQuestionIndex++;
+          renderQuestion();
+          quizCard.classList.remove('fade-out');
+        }, 300);
+      }
+    }
+
+    function showResults() {
+      showScreen('screen-results');
+      startConfetti();
+
+      const maxScore = Math.max(...Object.values(scores));
+      const winners = Object.keys(scores).filter(key => scores[key] === maxScore);
+
+      const profilesContainer = document.getElementById('winner-profiles-container');
+      profilesContainer.innerHTML = '';
+
+      if (winners.length > 1) {
+        const tieAlert = document.createElement('div');
+        tieAlert.style.marginBottom = '20px';
+        tieAlert.style.padding = '12px 16px';
+        tieAlert.style.borderRadius = '12px';
+        tieAlert.style.background = 'rgba(0, 242, 254, 0.1)';
+        tieAlert.style.border = '1px solid rgba(0, 242, 254, 0.3)';
+        tieAlert.style.color = 'var(--turquoise)';
+        tieAlert.style.fontWeight = '600';
+        tieAlert.style.fontSize = '0.95rem';
+        tieAlert.style.textAlign = 'center';
+        tieAlert.innerText = `¡Qué churo! Tuviste un empate técnico entre ${winners.length} áreas. Mirá los detalles de cada una abajo:`;
+        profilesContainer.appendChild(tieAlert);
+      }
+
+      winners.forEach(winnerKey => {
+        const data = areaData[winnerKey];
+        const card = document.createElement('div');
+        card.className = 'profile-card';
+        card.innerHTML = `
+          <h4 class="profile-title">
+            <span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:${data.color}"></span>
+            Afinidad Destacada: ${data.title}
+          </h4>
+          <p class="profile-text">${data.profile}</p>
+        `;
+        profilesContainer.appendChild(card);
+      });
+
+      const careersContainer = document.getElementById('careers-recommendations-container');
+      careersContainer.innerHTML = '';
+
+      winners.forEach(winnerKey => {
+        const data = areaData[winnerKey];
+        const areaSection = document.createElement('div');
+        areaSection.style.marginBottom = '24px';
+        const sectionTitle = document.createElement('h3');
+        sectionTitle.className = 'carreras-title';
+        sectionTitle.style.borderLeftColor = winnerKey === 'salud' ? 'var(--emerald)' : (winnerKey === 'tecnologia' ? 'var(--turquoise)' : 'rgba(255,255,255,0.4)');
+        sectionTitle.innerText = `Opciones de estudio en Tucumán: ${data.title}`;
+        const list = document.createElement('ul');
+        list.className = 'carreras-list';
+        data.carreras.forEach(carrera => {
+          const item = document.createElement('li');
+          item.innerText = carrera;
+          list.appendChild(item);
+        });
+        areaSection.appendChild(sectionTitle);
+        areaSection.appendChild(list);
+        careersContainer.appendChild(areaSection);
+      });
+
+      const barsWrapper = document.getElementById('chart-bars-wrapper');
+      barsWrapper.innerHTML = '';
+
+      const labelMap = {
+        salud: "Salud y Bienestar",
+        tecnologia: "Tecnología e Ingeniería",
+        sociales: "Sociales y Humanidades",
+        arte: "Arte y Diseño",
+        idiomas: "Idiomas y Comunicación",
+        oficios: "Oficios y Emprendimientos"
+      };
+
+      const sortedAreas = Object.keys(scores).map(key => ({
+        key,
+        score: scores[key],
+        label: labelMap[key],
+        pct: (scores[key] / 20) * 100
+      })).sort((a, b) => b.score - a.score);
+
+      sortedAreas.forEach(area => {
+        const isWinner = area.score === maxScore;
+        const group = document.createElement('div');
+        group.className = `chart-bar-group ${isWinner ? 'winner' : 'dimmed'}`;
+        group.innerHTML = `
+          <div class="chart-bar-label">
+            <span>${area.label}</span>
+            <span class="score-text">${area.score} pts (${Math.round(area.pct)}%)</span>
+          </div>
+          <div class="chart-bar-bg">
+            <div class="chart-bar-fill ${isWinner ? 'bar-' + area.key : 'bar-dimmed'}" data-width="${area.pct}%"></div>
+          </div>
+        `;
+        barsWrapper.appendChild(group);
+      });
+
+      setTimeout(() => {
+        document.querySelectorAll('.chart-bar-fill').forEach(fill => {
+          fill.style.width = fill.getAttribute('data-width');
+        });
+      }, 100);
+    }
+
+    function restartQuiz() {
+      stopConfetti();
+      const resultsCard = document.querySelector('#screen-results .glass-card');
+      resultsCard.classList.add('fade-out');
+      setTimeout(() => {
+        resultsCard.classList.remove('fade-out');
+        showScreen('screen-welcome');
+      }, 300);
+    }
+
+    // ---------- CONFETI ----------
+    let confettiActive = false;
+    let confettiInterval = null;
+    let confettiAnimationId = null;
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+
+    class ConfettiParticle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * -canvas.height - 20;
+        this.size = Math.random() * 8 + 6;
+        this.speedX = Math.random() * 4 - 2;
+        this.speedY = Math.random() * 5 + 4;
+        this.color = ['#0acf83','#00f2fe','#f1c40f','#e91e63','#9b59b6','#3498db'][Math.floor(Math.random() * 6)];
+        this.rotation = Math.random() * 360;
+        this.rotationSpeed = Math.random() * 4 - 2;
+        this.shape = Math.random() > 0.4 ? 'rect' : 'circle';
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.rotation += this.rotationSpeed;
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation * Math.PI / 180);
+        ctx.fillStyle = this.color;
+        if (this.shape === 'rect') {
+          ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, this.size/2, 0, Math.PI*2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    }
+
+    function startConfetti() {
+      resizeCanvas();
+      canvas.style.display = 'block';
+      confettiActive = true;
+      particles = [];
+      for (let i = 0; i < 100; i++) particles.push(new ConfettiParticle());
+      function animate() {
+        if (!confettiActive && particles.length === 0) { canvas.style.display = 'none'; return; }
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.update();
+          p.draw();
+          if (p.y > canvas.height) {
+            if (confettiActive) particles[i] = new ConfettiParticle();
+            else particles.splice(i, 1);
+          }
+        }
+        confettiAnimationId = requestAnimationFrame(animate);
+      }
+      animate();
+      confettiInterval = setTimeout(() => { confettiActive = false; }, 3000);
+    }
+
+    function stopConfetti() {
+      confettiActive = false;
+      clearTimeout(confettiInterval);
+      if (confettiAnimationId) cancelAnimationFrame(confettiAnimationId);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      canvas.style.display = 'none';
+      particles = [];
+    }
+  </script>
+</body>
+</html>
